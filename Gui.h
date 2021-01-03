@@ -7,11 +7,11 @@
 #include <Arduino.h>
 #include <lvgl/lvgl.h>
 
-#include <Page.h>
+#include <TabView.h>
 
 class Gui {
 
-	Page *pg;
+	TabView *tv;
 
 public:
 	Gui( void );
