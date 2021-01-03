@@ -7,8 +7,6 @@
  ************************************************/
 
 #include "config.h"
-#include <Arduino.h>
-#include <lvgl/lvgl.h>
 
 #include <freertos/FreeRTOS.h>
 
@@ -18,6 +16,8 @@
 #include <esp_task_wdt.h>	// Watchdog
 
 #include "Version.h"
+#include "Gui.h"
+
 
 	/****
 	* Shared object
@@ -113,6 +113,8 @@ ttgo->tft->setCursor(0, 0);
 ttgo->tft->setTextColor(TFT_RED);
 ttgo->tft->println("Test");
 delay(5000);
+
+		gui = new Gui();
 
 		/****
 		* Completed
