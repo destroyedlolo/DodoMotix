@@ -67,6 +67,12 @@ public:
 	 *****/
 
 Gui::Gui( void ){
+	LV_THEME_DEFAULT_INIT(
+		lv_theme_get_color_primary(), lv_theme_get_color_secondary(),
+		LV_THEME_MATERIAL_FLAG_DARK,
+		lv_theme_get_font_small(), lv_theme_get_font_normal(), lv_theme_get_font_subtitle(), lv_theme_get_font_title()
+	);
+
 	this->tv = new TabView( lv_scr_act() );	// Create the TabView
 
 		/* Create the 1st tab */
