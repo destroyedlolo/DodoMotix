@@ -5,9 +5,5 @@
 </p>
 <hr/>
 
-# 5MinutesMore
+# DodoMotix
 My SmartHome controler running on a LilyPI
-
----
-
-Why this name ? _when It's time to get up, it's the first sentence comming to my mind_
