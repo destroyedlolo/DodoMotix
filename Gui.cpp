@@ -1,11 +1,10 @@
 /********************************************************************
-* Page's test
+* GUI's root interface
 *********************************************************************/
 
 #include "Gui.h"
 
 #include <Page.h>
-#include <Label.h>
 
 	/*****
 	 * objects
@@ -13,74 +12,23 @@
 	
 Gui *gui;
 
-	/*****
-	 * Tabs
-	 *****/
-
-	/* Tab with a long text inside */
-class TabLT : public Page {
-	Label *lbl;
-
-public:
-	TabLT( lv_obj_t *tv ) : Page(tv, true) {
-
-			/* Add a label inside */
-		this->lbl = new Label( **this );
-		this->lbl->Align( LV_ALIGN_IN_TOP_MID );	// in the middle of the page
-		this->lbl->setLongTextMode( LV_LABEL_LONG_BREAK );
-		this->lbl->setWidth( 300 );			// its size
-		this->lbl->AutoRealign( true );		// to ensure the aligment is correct
-		this->lbl->setTextStatic("Lorem ipsum dolor sit amet, consectetur adipiscing elit,\n"
-				"sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.\n"
-				"Ut enim ad minim veniam, quis nostrud exercitation ullamco\n"
-				"laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure\n"
-				"dolor in reprehenderit in voluptate velit esse cillum dolore\n"
-				"eu fugiat nulla pariatur.\n"
-				"Excepteur sint occaecat cupidatat non proident, sunt in culpa\n"
-				"qui officia deserunt mollit anim id est laborum."
-		);
-/*
-		this->dumpObj("TabLT");
-		this->lbl->dumpObj("Label");
-*/
-	}
-
-};
-
-class TabSL : public Page {
-	Label *lbl;
-
-public:
-	TabSL( lv_obj_t *tv ) : Page(tv, true) {
-
-			/* Add a label inside */
-		this->lbl = new Label( **this );
-		this->lbl->setReColor( true );
-		this->lbl->Align( LV_ALIGN_CENTER );	// in the middle of the page
-		this->lbl->setTextStatic("#0000ff 2nd#  tab");
-	}
-};
-
-
 	/**** 
 	 * Build the GUI
 	 *****/
 
 Gui::Gui( void ){
-	LV_THEME_DEFAULT_INIT(
-		lv_theme_get_color_primary(), lv_theme_get_color_secondary(),
-		LV_THEME_MATERIAL_FLAG_DARK,
-		lv_theme_get_font_small(), lv_theme_get_font_normal(), lv_theme_get_font_subtitle(), lv_theme_get_font_title()
-	);
+	this->mainStyle = new Style();
+	this->mainStyle->setBgColor( LV_COLOR_BLACK );
+	this->mainStyle->setBgGradStart( 50 );
+	this->mainStyle->setBgGradColor( LV_COLOR_NAVY );
+	this->mainStyle->setBgGradDir( LV_GRAD_DIR_VER );
+	this->mainStyle->setTextColor( LV_COLOR_WHITE );
+	this->mainStyle->seTexttFont( &lv_font_montserrat_28 );
 
 	this->tv = new TabView( lv_scr_act() );	// Create the TabView
+	tv->addStyle( mainStyle );
 
-		/* Create the 1st tab */
-	lv_obj_t *t = lv_tabview_add_tab(**this->tv, "Long Text");	// Lvgl object
-	TabLT *t1 = new TabLT(t);	// Assign it to a new page with dedicated content
-
-		/* Create the 2nd tab */
-	t = lv_tabview_add_tab(**this->tv, "Colored Text");
-	TabSL *t2 = new TabSL(t);
+	this->pstn = new PSettings( tv->AddTab( LV_SYMBOL_SETTINGS " Param" ) );
+	this->pnrj = new PEnergy( tv->AddTab( LV_SYMBOL_SETTINGS " Param" ) );
 }
 
