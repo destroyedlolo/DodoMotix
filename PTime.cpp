@@ -9,7 +9,7 @@
 
 PTime::PTime( lv_obj_t *np ) : Page( np, true ), daynum( -1 ){
 	this->dtcontainer = new Container( this->getMyself() );
-	this->dtcontainer->setSize( this->getWidth(), this->getHeight()/2 );
+	this->dtcontainer->setSize( this->getWidth(), 75 );
 	this->dtcontainer->Align( LV_ALIGN_CENTER );
 
 		/* Display time */
