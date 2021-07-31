@@ -198,12 +198,14 @@ void setup(){
 		*****/
 
 	ttgo = TTGOClass::getWatch();
-	
+	ttgo->begin();	// start peripherals
+
 		/****
 		* restore the time
 		*****/
 
 	Serial.println("Reading RTC ...");
+
 	setenv("TZ", "CET-1CEST-2,M3.5.0/02:00:00,M10.5.0/03:00:00", 1);
 	tzset();
 
@@ -219,6 +221,8 @@ void setup(){
 		/****
 		* Start the GUI
 		*****/
+
+	Serial.println("Starting GUI");
 
 	ttgo->begin();			// start peripherals
 	ttgo->lvgl_begin();
