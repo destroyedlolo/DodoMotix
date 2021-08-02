@@ -45,6 +45,9 @@ Gui::Gui( void ){
 		 * ready to launch automation
 		 */
 	this->initAutomation();	// Launch automation
+
+		/* Set the default tab (hour) */
+	this->tv->setActiveTab(1, LV_ANIM_OFF);
 }
 
 void Gui::initAutomation( void ){

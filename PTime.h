@@ -10,9 +10,10 @@
 #include <Label.h>
 
 class PTime : public Page {
-	Container	*dtcontainer;
 	Label		*timelabel,
 				*datelabel;
+
+	Label		*version;
 
 	lv_task_t	*upd_h_task;	// Task to update the Gui
 
