@@ -16,8 +16,6 @@
 
 class Gui {
 
-	Style *mainStyle;
-
 	TabView *tv;
 	PSettings *pstn;
 	PTime *ptime;
@@ -30,8 +28,11 @@ public:
 	 * Has to be called ONLY when everything is initialised
 	 */
 	void initAutomation( void );
+
 };
 
 extern class Gui *gui;
+
+extern Style *mainStyle, *dropdownStyle;
 
 #endif

@@ -11,22 +11,30 @@
 	 *****/
 	
 Gui *gui;
+Style *mainStyle, *dropdownStyle;
 
 	/**** 
 	 * Build the GUI
 	 *****/
 
 Gui::Gui( void ){
-	this->mainStyle = new Style();
-	this->mainStyle->setBgColor( LV_COLOR_BLACK );
-	this->mainStyle->setBgGradStart( 50 );
-	this->mainStyle->setBgGradColor( LV_COLOR_NAVY );
-	this->mainStyle->setBgGradDir( LV_GRAD_DIR_VER );
-	this->mainStyle->setTextColor( LV_COLOR_WHITE );
-	this->mainStyle->seTexttFont( &lv_font_montserrat_28 );
+		/* Styles */
+	mainStyle = new Style();
+	mainStyle->setBgColor( LV_COLOR_BLACK );
+	mainStyle->setBgGradStart( 50 );
+	mainStyle->setBgGradColor( LV_COLOR_NAVY );
+	mainStyle->setBgGradDir( LV_GRAD_DIR_VER );
+	mainStyle->setTextColor( LV_COLOR_WHITE );
+	mainStyle->seTexttFont( &lv_font_montserrat_28 );
 
+	dropdownStyle = new Style();
+	dropdownStyle->copyStyle( mainStyle );
+	dropdownStyle->setRadius( 5 );
+	dropdownStyle->setBgOpacity( LV_OPA_70 );
+	dropdownStyle->setBorderWidth( 1 );
+	
 	this->tv = new TabView( lv_scr_act() );	// Create the TabView
-	this->tv->addStyle( this->mainStyle );
+	this->tv->addStyle( mainStyle );
 
 		/* Add styles to tab */
 	this->tv->setBgColor( LV_COLOR_NAVY, LV_TABVIEW_PART_TAB_BG );
