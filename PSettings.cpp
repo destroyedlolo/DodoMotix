@@ -13,9 +13,9 @@ LV_IMG_DECLARE(image_piscine_32px);
 PSettings::PSettings( lv_obj_t *np ) : Page( np, true ){
 
 		/* Pool mode */
-	this->poolCont = new Container( this->getMyself() );
+	this->poolCont = new Container( containerStyle, this->getMyself() );
 	this->poolCont->setBgOpacity(0);
-	this->poolCont->Align( LV_ALIGN_IN_TOP_LEFT );
+	this->poolCont->Align( LV_ALIGN_IN_TOP_LEFT, (const lv_obj_t *)NULL, 0,5 );
 	this->poolCont->setFit( LV_FIT_TIGHT );	// Its size is the one of it's child
 	this->poolCont->AutoRealign();	// otherwise the icon is shifted
 	this->poolCont->setPadding(0);

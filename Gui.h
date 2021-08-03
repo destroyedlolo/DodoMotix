@@ -33,6 +33,8 @@ public:
 
 extern class Gui *gui;
 
-extern Style *mainStyle, *dropdownStyle;
+extern Style *mainStyle,
+			*containerStyle,
+			*dropdownStyle;
 
 #endif

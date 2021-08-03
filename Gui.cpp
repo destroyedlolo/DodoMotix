@@ -11,7 +11,7 @@
 	 *****/
 	
 Gui *gui;
-Style *mainStyle, *dropdownStyle;
+Style *mainStyle, *containerStyle, *dropdownStyle;
 
 	/**** 
 	 * Build the GUI
@@ -27,8 +27,11 @@ Gui::Gui( void ){
 	mainStyle->setTextColor( LV_COLOR_WHITE );
 	mainStyle->seTexttFont( &lv_font_montserrat_28 );
 
+	containerStyle = new Style();
+	containerStyle->setBgOpacity(0);
+	containerStyle->setBorderWidth(0);
+
 	dropdownStyle = new Style();
-//	dropdownStyle->copyStyle( mainStyle );
 	dropdownStyle->setRadius( 5 );
 	dropdownStyle->seTexttFont( &lv_font_montserrat_16 );
 	dropdownStyle->setBgOpacity( LV_OPA_70 );
