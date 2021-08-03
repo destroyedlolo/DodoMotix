@@ -7,8 +7,11 @@
 
 #include <Page.h>
 #include <DropDown.h>
+#include <Image.h>
 
 class PSettings : public Page {
+
+	Image		*poolIcon;
 	DropDown	*pool;
 
 public :
