@@ -135,6 +135,10 @@ void onMqttMessage(char* topic, char* payload, AsyncMqttClientMessageProperties 
 #endif
 }
 
+void time_synchronized(struct timeval *tv){
+	Serial.println("time synchronized");
+	ttgo->rtc->syncToRtc();
+}
 
 void setup(){
 	Serial.begin(115200);
@@ -248,6 +252,7 @@ void setup(){
 	connectToWifi();
 
 	Serial.println("Time synchronisation requested");
+	sntp_set_time_sync_notification_cb( time_synchronized );
 	configTzTime("CET-1CEST-2,M3.5.0/02:00:00,M10.5.0/03:00:00", "pool.ntp.org");
 /* the time synchronisation is asynchronous
  * so calling here RTC updating here is void
