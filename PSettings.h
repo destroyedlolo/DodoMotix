@@ -16,6 +16,10 @@ class PSettings : public Page {
 	Image		*poolIcon;
 	DropDown	*pool;
 
+	Container	*homeCont;
+	Image		*homeIcon;
+	DropDown	*home;
+
 public :
 	PSettings( lv_obj_t * );
 };

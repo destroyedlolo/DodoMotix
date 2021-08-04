@@ -9,6 +9,7 @@
 #include "PSettings.h"
 
 LV_IMG_DECLARE(image_piscine_32px);
+LV_IMG_DECLARE(image_maison_32px);
 
 PSettings::PSettings( lv_obj_t *np ) : Page( np, true ){
 
@@ -31,4 +32,25 @@ PSettings::PSettings( lv_obj_t *np ) : Page( np, true ){
 	this->pool->setWidth( 160 );
 	this->pool->setChoices( "Heures Creuses\nArret\nForce", true );
 	this->pool->Align( LV_ALIGN_OUT_RIGHT_MID, this->poolIcon, 10 );
+
+		/* Home mode */
+	this->homeCont = new Container( containerStyle, this->getMyself() );
+	this->homeCont->setBgOpacity(0);
+	this->homeCont->Align( LV_ALIGN_OUT_BOTTOM_MID, this->poolCont->getMyself(), 0,5 );
+	this->homeCont->setFit( LV_FIT_TIGHT );	// Its size is the one of it's child
+	this->homeCont->AutoRealign();	// otherwise the icon is shifted
+	this->homeCont->setPadding(0);
+	this->homeCont->setClickable( false);
+
+	this->homeIcon = new Image( this->homeCont );
+	this->homeIcon->Set( &image_maison_32px );
+	this->homeIcon->Align( LV_ALIGN_IN_LEFT_MID );
+	this->homeIcon->setClickable( false );
+
+	this->home = new DropDown( this->homeCont );
+	this->home->addStyle( dropdownStyle );
+	this->home->setWidth( 160 );
+	this->home->setChoices( "Auto\nManuel\nTravail\nVacances\nAbsent", true );
+	this->home->Align( LV_ALIGN_OUT_RIGHT_MID, this->homeIcon, 10 );
+
 }
