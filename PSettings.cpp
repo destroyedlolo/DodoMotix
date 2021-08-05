@@ -34,6 +34,7 @@ PSettings::PSettings( lv_obj_t *np ) : Page( np, true ){
 	this->pool->addStyle( dropdownStyle );
 	this->pool->setWidth( 160 );
 	this->pool->setChoices( "Heures Creuses\nArret\nForce", true );
+	this->pool->setShow( true );
 	this->pool->Align( LV_ALIGN_OUT_RIGHT_MID, this->poolIcon, 10 );
 
 		/* Home mode */
@@ -54,6 +55,7 @@ PSettings::PSettings( lv_obj_t *np ) : Page( np, true ){
 	this->home->addStyle( dropdownStyle );
 	this->home->setWidth( 160 );
 	this->home->setChoices( "Auto\nManuel\nTravail\nVacances\nAbsent", true );
+	this->home->setShow( true );
 	this->home->Align( LV_ALIGN_OUT_RIGHT_MID, this->homeIcon, 10 );
 
 }
@@ -70,11 +72,22 @@ bool PSettings::handleMessages( const char *t, const char *p ){
 			this->home->setSelected(3);
 		else if(!strcmp(p,"Absent"))
 			this->home->setSelected(4);
-	} else {
-Serial.println(">>>> NON !");
-		return false;
-}
 
-Serial.println(">>>> Trouvé");
+		this->home->setShow( true );
+	} else if(!strcmp(t, MAJORDOME "/Mode/Piscine")){
+		if(!strcmp(p,"Heures Creuses"))
+			this->pool->setSelected(0);
+		else if(!strcmp(p,"Arret"))
+			this->pool->setSelected(1);
+		else if(!strcmp(p,"Forcé"))
+			this->pool->setSelected(2);
+
+		this->pool->setShow( true );
+	} else {
+		Serial.println(">>>> NON !");
+		return false;
+	}
+
+	Serial.println(">>>> Trouvé");
 	return true;
 }
