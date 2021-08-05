@@ -52,9 +52,6 @@
 #	define BROKER_PORT 1883
 #endif
 
-	/* DEV DEV DEV DEV */
-#define BROKER_HOST	"torchwood.chez.moi"
-
 	/****
 	* Shared object
 	*****/

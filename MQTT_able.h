@@ -7,7 +7,7 @@
 
 #include <AsyncMqttClient.h>
 
-#define MAJORDOME "Majordome.dev"
+#define MAJORDOME "Majordome"
 
 extern AsyncMqttClient mqttClient;
 
