@@ -9,6 +9,8 @@
 
 #define MAJORDOME "Majordome.dev"
 
+extern AsyncMqttClient mqttClient;
+
 class MQTT_able {
 protected :
 	const char **topics;

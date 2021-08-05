@@ -11,6 +11,16 @@
 LV_IMG_DECLARE(image_piscine_32px);
 LV_IMG_DECLARE(image_maison_32px);
 
+static void poolChanged(lv_obj_t * obj, lv_event_t event){
+	static const char *val[]={ "Heures Creuses", "Arret", "Forcé" };
+
+	if(event == LV_EVENT_VALUE_CHANGED){
+		Serial.printf( "Pool changed to : %d (%s)\n", lv_dropdown_get_selected(obj), val[lv_dropdown_get_selected(obj)]);
+		mqttClient.publish( MAJORDOME "/Mode/Piscine", 0, true, val[lv_dropdown_get_selected(obj)], strlen( val[lv_dropdown_get_selected(obj)] ));
+	}
+}
+
+
 PSettings::PSettings( lv_obj_t *np ) : Page( np, true ){
 
 	static const char *tpc[] = { MAJORDOME "/Mode/Force", MAJORDOME "/Mode/Piscine", NULL };
@@ -36,6 +46,8 @@ PSettings::PSettings( lv_obj_t *np ) : Page( np, true ){
 	this->pool->setChoices( "Heures Creuses\nArret\nForce", true );
 	this->pool->setShow( true );
 	this->pool->Align( LV_ALIGN_OUT_RIGHT_MID, this->poolIcon, 10 );
+
+	this->pool->attacheEventeHandler( poolChanged );
 
 		/* Home mode */
 	this->homeCont = new Container( containerStyle, this->getMyself() );
