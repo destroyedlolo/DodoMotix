@@ -20,6 +20,14 @@ static void poolChanged(lv_obj_t * obj, lv_event_t event){
 	}
 }
 
+static void homeChanged(lv_obj_t * obj, lv_event_t event){
+	static const char *val[]={ "Auto", "Manuel", "Travail", "Vacances", "Absent" };
+
+	if(event == LV_EVENT_VALUE_CHANGED){
+		Serial.printf( "Home changed to : %d (%s)\n", lv_dropdown_get_selected(obj), val[lv_dropdown_get_selected(obj)]);
+		mqttClient.publish( MAJORDOME "/Mode/Force", 0, true, val[lv_dropdown_get_selected(obj)], strlen( val[lv_dropdown_get_selected(obj)] ));
+	}
+}
 
 PSettings::PSettings( lv_obj_t *np ) : Page( np, true ){
 
@@ -70,6 +78,7 @@ PSettings::PSettings( lv_obj_t *np ) : Page( np, true ){
 	this->home->setShow( true );
 	this->home->Align( LV_ALIGN_OUT_RIGHT_MID, this->homeIcon, 10 );
 
+	this->home->attacheEventeHandler( homeChanged );
 }
 
 bool PSettings::handleMessages( const char *t, const char *p ){
