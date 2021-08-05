@@ -13,6 +13,9 @@ LV_IMG_DECLARE(image_maison_32px);
 
 PSettings::PSettings( lv_obj_t *np ) : Page( np, true ){
 
+	static const char *tpc[] = { MAJORDOME "/Mode/Force", MAJORDOME "/Mode/Piscine", NULL };
+	this->topics = tpc;
+
 		/* Pool mode */
 	this->poolCont = new Container( containerStyle, this->getMyself() );
 	this->poolCont->setBgOpacity(0);
@@ -53,4 +56,25 @@ PSettings::PSettings( lv_obj_t *np ) : Page( np, true ){
 	this->home->setChoices( "Auto\nManuel\nTravail\nVacances\nAbsent", true );
 	this->home->Align( LV_ALIGN_OUT_RIGHT_MID, this->homeIcon, 10 );
 
+}
+
+bool PSettings::handleMessages( const char *t, const char *p ){
+	if(!strcmp(t, MAJORDOME "/Mode/Force")){
+		if(!strcmp(p,"Auto"))
+			this->home->setSelected(0);
+		else if(!strcmp(p,"Manuel"))
+			this->home->setSelected(1);
+		else if(!strcmp(p,"Travail"))
+			this->home->setSelected(2);
+		else if(!strcmp(p,"Vacances"))
+			this->home->setSelected(3);
+		else if(!strcmp(p,"Absent"))
+			this->home->setSelected(4);
+	} else {
+Serial.println(">>>> NON !");
+		return false;
+}
+
+Serial.println(">>>> Trouvé");
+	return true;
 }

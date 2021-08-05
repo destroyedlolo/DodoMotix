@@ -6,6 +6,7 @@
 
 #include <Arduino.h>
 #include <lvgl/lvgl.h>
+#include <AsyncMqttClient.h>
 
 #include <Page.h>
 #include <TabView.h>
@@ -28,6 +29,18 @@ public:
 	 * Has to be called ONLY when everything is initialised
 	 */
 	void initAutomation( void );
+
+	/* Register MQTT topics 
+	 *	-> MQTT client
+	 */
+	void registerMQTT( AsyncMqttClient & );
+
+	/* Handle incomming topics 
+	 * 	-> topic
+	 * 	-> payload
+	 * 	<- true if the topic has been consumed
+	 */
+	bool handleMessages( const char *, const char * );
 
 };
 

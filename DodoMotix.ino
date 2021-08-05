@@ -52,6 +52,8 @@
 #	define BROKER_PORT 1883
 #endif
 
+	/* DEV DEV DEV DEV */
+#define BROKER_HOST	"torchwood.chez.moi"
 
 	/****
 	* Shared object
@@ -98,13 +100,8 @@ void connectToMqtt(){
 
 void onMqttConnect(bool ){
 		/* Register home's topics */
-#if 0
-	for(int i = 0; i < sizeof(topics)/sizeof(topics[1]); i++){
-  		Serial.print("Registering : ");
-		Serial.println(topics[i].TOPIC);
-		mqttClient.subscribe(topics[i].TOPIC, 0);
-	}
-#endif
+	Serial.println("Registering MQTT :");
+	gui->registerMQTT(mqttClient);
 }
 
 void onMqttDisconnect(AsyncMqttClientDisconnectReason reason){
@@ -125,14 +122,7 @@ void onMqttMessage(char* topic, char* payload, AsyncMqttClientMessageProperties 
 	Serial.println(t);
 
 		/* Handle messaging processing */
-#if 0
-	for(int i = 0; i < sizeof(topics)/sizeof(topics[1]); i++){
-		if(!strcmp( topic, topics[i].TOPIC)){
-			topics[i].lbl->setText( t );
-			break;
-		}
-	}
-#endif
+	gui->handleMessages( topic, t );
 }
 
 void time_synchronized(struct timeval *tv){
