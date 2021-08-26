@@ -8,5 +8,5 @@
 */
 
 #ifndef VERSION_H
-#define VERSION_H "0.0602"
+#define VERSION_H "0.0603"
 #endif
