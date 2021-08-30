@@ -68,11 +68,14 @@ void Gui::initAutomation( void ){
 
 void Gui::registerMQTT( AsyncMqttClient &mqttClient ){
 	this->pstn->registerMQTT(mqttClient);
+	this->ptime->registerMQTT(mqttClient);
 }
 
 bool Gui::handleMessages( const char *t, const char *p ){
-	if( !this->pstn->handleMessages(t,p) )
-		return false;
+	if( this->pstn->handleMessages(t,p) )
+		return true;
+	else if( this->ptime->handleMessages(t,p) )
+		return true;
 	
-	return true;
+	return false;
 }

@@ -11,6 +11,26 @@
 PTime::PTime( lv_obj_t *np ) : Page( np, true ), daynum( -1 ){
 	this->SetScrollbarMode( LV_SCRLBAR_MODE_OFF );
 
+	static const char *tpc[] = {
+		"maison/Temperature/Dehors",
+		"maison/Temperature/Salon",
+		NULL
+	};
+	this->topics = tpc;
+
+		/* Temperatures */
+	this->tDehors = new Label( this->getMyself() );
+	this->tDehors->seTexttFont( &lv_font_montserrat_28 );
+	this->tDehors->setText( "+??.?" );
+	this->tDehors->Align( LV_ALIGN_IN_TOP_LEFT );
+//	this->tDehors->AutoRealign();
+
+	this->tSalon = new Label( this->getMyself() );
+	this->tSalon->seTexttFont( &lv_font_montserrat_28 );
+	this->tSalon->setText( "+??.?" );
+	this->tSalon->Align( LV_ALIGN_IN_TOP_RIGHT );
+//	this->tSalon->AutoRealign();
+
 		/* Display time */
 	this->timelabel = new Label( this->getMyself() );
 	this->timelabel->seTexttFont( &lv_font_montserrat_48 );
@@ -53,6 +73,23 @@ void PTime::updateTime( void ){
 
 static void cbUpdTime( lv_task_t *tsk ){
 	((PTime *)(tsk->user_data))->updateTime();
+}
+
+bool PTime::handleMessages( const char *t, const char *p ){
+	char s[8];
+
+#if 0
+	if(!strcmp(t, "maison/Temperature/Dehors")){
+		sprintf(s, "%4.1f", atof(p));
+		this->tDehors->setText( s );
+	} else if(!strcmp(t, "maison/Temperature/Salon")){
+		sprintf(s, "%4.1f", atof(p));
+		this->tSalon->setText( s );
+#endif
+	} else
+		return false;
+
+	return true;
 }
 
 void PTime::initAutomation( void ){
