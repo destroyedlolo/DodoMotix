@@ -78,10 +78,10 @@ static void cbUpdTime( lv_task_t *tsk ){
 bool PTime::handleMessages( const char *t, const char *p ){
 	char s[8];
 
-#if 0
 	if(!strcmp(t, "maison/Temperature/Dehors")){
 		sprintf(s, "%4.1f", atof(p));
 		this->tDehors->setText( s );
+#if 0
 	} else if(!strcmp(t, "maison/Temperature/Salon")){
 		sprintf(s, "%4.1f", atof(p));
 		this->tSalon->setText( s );
