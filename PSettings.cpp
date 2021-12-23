@@ -55,7 +55,7 @@ PSettings::PSettings( lv_obj_t *np ) : Page( np, true ){
 	this->pool->setShow( true );
 	this->pool->Align( LV_ALIGN_OUT_RIGHT_MID, this->poolIcon, 10 );
 
-	this->pool->attacheEventeHandler( poolChanged );
+	this->pool->attachEventHandler( poolChanged );
 
 		/* Home mode */
 	this->homeCont = new Container( containerStyle, this->getMyself() );
@@ -78,7 +78,7 @@ PSettings::PSettings( lv_obj_t *np ) : Page( np, true ){
 	this->home->setShow( true );
 	this->home->Align( LV_ALIGN_OUT_RIGHT_MID, this->homeIcon, 10 );
 
-	this->home->attacheEventeHandler( homeChanged );
+	this->home->attachEventHandler( homeChanged );
 }
 
 bool PSettings::handleMessages( const char *t, const char *p ){
