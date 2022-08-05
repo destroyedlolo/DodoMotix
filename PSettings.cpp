@@ -12,7 +12,7 @@ LV_IMG_DECLARE(image_piscine_32px);
 LV_IMG_DECLARE(image_maison_32px);
 
 static void poolChanged(lv_obj_t * obj, lv_event_t event){
-	static const char *val[]={ "Heures Creuses", "Arret", "Forcé" };
+	static const char *val[]={ "Heures Creuses", "Canicule", "Arret", "Forcé" };
 
 	if(event == LV_EVENT_VALUE_CHANGED){
 		Serial.printf( "Pool changed to : %d (%s)\n", lv_dropdown_get_selected(obj), val[lv_dropdown_get_selected(obj)]);
@@ -51,7 +51,7 @@ PSettings::PSettings( lv_obj_t *np ) : Page( np, true ){
 	this->pool = new DropDown( this->poolCont );
 	this->pool->addStyle( dropdownStyle );
 	this->pool->setWidth( 160 );
-	this->pool->setChoices( "Heures Creuses\nArret\nForce", true );
+	this->pool->setChoices( "Heures Creuses\nCanicule\nArret\nForce", true );
 	this->pool->setShow( true );
 	this->pool->Align( LV_ALIGN_OUT_RIGHT_MID, this->poolIcon, 10 );
 
@@ -98,10 +98,12 @@ bool PSettings::handleMessages( const char *t, const char *p ){
 	} else if(!strcmp(t, MAJORDOME "/Mode/Piscine")){
 		if(!strcmp(p,"Heures Creuses"))
 			this->pool->setSelected(0);
-		else if(!strcmp(p,"Arret"))
+		else if(!strcmp(p,"Canicule"))
 			this->pool->setSelected(1);
-		else if(!strcmp(p,"Forcé"))
+		else if(!strcmp(p,"Arret"))
 			this->pool->setSelected(2);
+		else if(!strcmp(p,"Forcé"))
+			this->pool->setSelected(3);
 
 		this->pool->setShow( true );
 	} else {
